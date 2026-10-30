@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menhater Diva 😈</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #090609;
+  color: #ff69b4;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+header {
+  padding: 25px 12px;
+  background: linear-gradient(135deg,#260018,#090609);
+  border-bottom: 2px solid #ff168c;
+}
+
+h1 {
+  font-size: clamp(30px,8vw,48px);
+  text-shadow: 0 0 18px #ff168c;
+  margin: 10px 0;
+}
+
+.subtitle { color: #ffd5e9; }
+
+.card {
+  margin: 22px auto;
+  padding: 24px 18px;
+  width: 90%;
+  max-width: 500px;
+  background: #160d16;
+  border: 1px solid #ff168c;
+  border-radius: 22px;
+  box-shadow: 0 0 20px #ff168c22;
+}
+
+h2 { color: #ff8cc9; }
+
+button {
+  border: 0;
+  border-radius: 25px;
+  background: #ff168c;
+  color: #16000b;
+  padding: 13px 19px;
+  margin: 7px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover { background: #ffb4da; }
+
+#quote {
+  color: white;
+  font-size: 20px;
+  line-height: 1.6;
+  min-height: 65px;
+}
+
+#score {
+  color: #fff;
+  font-size: 19px;
+}
+
+footer {
+  padding: 22px;
+  color: #b98aa6;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div style="font-size:55px">😈👑</div>
+  <h1>MENHATER DIVA</h1>
+  <p class="subtitle">Pretty face. Savage soul. Zero nonsense. 💋</p>
+</header>
+
+<section class="card">
+  <h2>💔 THE TRUST ISSUE DIARIES</h2>
+  <p style="font-size:21px;color:white;line-height:1.6">
+    In search of bharosewale,<br>
+    I found <span style="color:#ff168c;font-weight:bold">
+    bhosidewale</span> 😭💀
+  </p>
+  <p>Trust level: currently under investigation 🔎</p>
+</section>
+
+<section class="card">
+  <h2>🎲 SPIN THE SAVAGE QUOTE</h2>
+  <p id="quote">Ready for your daily dose of diva energy?</p>
+  <button onclick="newQuote()">UNLEASH THE SAVAGE 😈</button>
+</section>
+
+<section class="card">
+  <h2>💅 RED FLAG OR GREEN FLAG?</h2>
+  <p id="question" style="color:white;font-size:19px">
+    Someone says, "Trust me, I'm different."
+  </p>
+  <button onclick="answer('red')">🚩 RED FLAG</button>
+  <button onclick="answer('green')">💚 GREEN FLAG</button>
+  <p id="feedback"></p>
+  <p id="score">Diva points: 0</p>
+  <button onclick="resetGame()">PLAY AGAIN ↻</button>
+</section>
+
+<section class="card">
+  <h2>🖤 DIVA MANIFESTO</h2>
+  <p>👑 Self-respect above attention.</p>
+  <p>💋 Standards high, drama low.</p>
+  <p>😈 No chasing. No begging. Just growing.</p>
+  <p>✨ Trust is earned, not demanded.</p>
+</section>
+
+<footer>
+  Made with attitude & a little heartbreak 💗<br>
+  MENHATER DIVA © 2026
+</footer>
+
+<script>
+const quotes = [
+  "In search of bharosewale, I found bhosidewale. 💀",
+  "My heart has a password. Nobody gets the hint. 🔐",
+  "Red flags? Babe, I run a whole exhibition. 🚩",
+  "I'm the plot twist, not the side character. 👑",
+  "Self-love: the relationship that never disappoints. 💋",
+  "Pretty, petty, and protecting my peace. 😈",
+  "Not everyone's cup of tea. More like their tequila. 🖤"
+];
+
+function newQuote() {
+  const q = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById("quote").textContent = q;
+}
+
+const questions = [
+  {
+    text: 'Someone says, "Trust me, I am different."',
+    answer: "red",
+    why: "Words are easy. Consistent actions matter. 👀"
+  },
+  {
+    text: "They respect your boundaries even when upset.",
+    answer: "green",
+    why: "Respect is a genuinely good sign. 💚"
+  },
+  {
+    text: "They repeatedly lie and blame you for noticing.",
+    answer: "red",
+    why: "Repeated dishonesty deserves attention. 🚩"
+  },
+  {
+    text: "They apologize and actually change their behaviour.",
+    answer: "green",
+    why: "Accountability matters more than empty promises. ✨"
+  },
+  {
+    text: "They demand your passwords to prove your love.",
+    answer: "red",
+    why: "Love doesn't require surrendering your privacy. 🔐"
+  }
+];
+
+let index = 0;
+let points = 0;
+let finished = false;
+
+function answer(choice) {
+  if (finished) return;
+
+  const q = questions[index];
+  const feedback = document.getElementById("feedback");
+
+  if (choice === q.answer) {
+    points++;
+    feedback.textContent = "Correct! 💅 " + q.why;
+  } else {
+    feedback.textContent = "Plot twist! 😭 " + q.why;
+  }
+
+  document.getElementById("score").textContent =
+    "Diva points: " + points + " / " + (index + 1);
+
+  index++;
+
+  if (index >= questions.length) {
+    finished = true;
+    document.getElementById("question").textContent =
+      "GAME OVER 👑 Your diva score: " + points + "/5";
+    feedback.textContent += " Tap PLAY AGAIN for another round!";
+  } else {
+    document.getElementById("question").textContent =
+      questions[index].text;
+  }
+}
+
+function resetGame() {
+  index = 0;
+  points = 0;
+  finished = false;
+  document.getElementById("question").textContent = questions[0].text;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("score").textContent = "Diva points: 0";
+}
+</script>
+
+</body>
+</html>
